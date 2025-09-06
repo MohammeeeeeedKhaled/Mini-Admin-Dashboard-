@@ -94,8 +94,17 @@ The app is fully client-side and does not require a backend.
 JSONPlaceholder API provides dummy data for Users, Posts, and Comments.
 
 🖼 Screenshots
+<img width="1366" height="651" alt="1" src="https://github.com/user-attachments/assets/786d31cf-7bcb-4661-a9e1-7f7594c1080e" />
 
+<img width="1358" height="655" alt="2" src="https://github.com/user-attachments/assets/18bc0322-a1f4-44f4-be1d-850b6f24a5fb" />
 
+<img width="1361" height="655" alt="3" src="https://github.com/user-attachments/assets/2b50ae25-493b-4817-a736-659bbd62cfda" />
+
+<img width="1360" height="655" alt="4_1" src="https://github.com/user-attachments/assets/92981290-5f00-4184-b600-841f80f99fd0" />
+
+<img width="1359" height="649" alt="5" src="https://github.com/user-attachments/assets/b98ff406-4a3b-4e17-9d30-cb8207a2a3af" />
+
+<img width="1348" height="648" alt="6" src="https://github.com/user-attachments/assets/3a684a98-827a-4f9e-bb3c-81641907564c" />
 <img width="1359" height="645" alt="7" src="https://github.com/user-attachments/assets/f98b2d7e-b656-4b09-8ef7-b6e535c461d6" />
 
 
