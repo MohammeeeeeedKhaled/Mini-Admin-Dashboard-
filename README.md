@@ -1,62 +1,54 @@
-🌟 Mini Admin Dashboard
+# 🌟 Mini Admin Dashboard
 
-A lightweight Admin Dashboard built with HTML, CSS, Bootstrap 5, jQuery, DataTables, and Toastr, showcasing Users and Posts from the JSONPlaceholder API with local CRUD and favorite functionality.
+**A lightweight Admin Dashboard built with HTML, CSS, Bootstrap 5, jQuery, DataTables, and Toastr, showcasing Users and Posts from the JSONPlaceholder API with local CRUD and favorite functionality.**
 
-🚀 Features
+---
 
-📊 Dashboard Overview:
+## 🚀 Features
 
-Shows total number of Users, Posts, and Comments.
+### 📊 Dashboard Overview
+- Shows total number of **Users, Posts, and Comments**.
+- Combines **API data** with **locally added/edited data**.
 
-Combines API data with locally added/edited data.
+### 👤 Users Management
+- Display users in a **DataTable** with **Bootstrap styling**.
+- ➕ **Add / ✏️ Edit / 🗑 Delete** users locally.
+- Mark users as ⭐ **Favorites** stored in **LocalStorage**.
+- 🔍 **View user details** in a modal.
 
-👤 Users Management:
+### 📝 Posts Management
+- Display posts fetched from **API + local posts**.
+- ➕ **Add / ✏️ Edit / 🗑 Delete** posts locally.
+- Live 🔎 **search on post title/body**.
+- View 💬 **comments for each post** fetched from API.
 
-Display users in a DataTable with Bootstrap styling.
+### 💾 Export / Import
+- Export local data (**users, favorites, posts**) as **JSON**.
+- Import previously exported JSON to **restore data**.
 
-➕ Add / ✏️ Edit / 🗑 Delete users locally.
+### 🌙 Dark / Light Mode
+- Toggle for comfortable viewing.
 
-Mark users as ⭐ Favorites stored in LocalStorage.
+### 🔔 Notifications
+- **Toastr** notifications for actions like add, edit, delete, favorite, and errors.
 
-🔍 View user details in a modal.
+### ✨ Animations
+- **Animate.css** for smooth transitions.
 
-📝 Posts Management:
+---
 
-Display posts fetched from API + local posts.
+## 📚 Libraries / Dependencies
+- **Bootstrap 5** – Responsive layout, cards, buttons, modals, navbars, tables.
+- **jQuery** – DOM manipulation, event handling, AJAX requests.
+- **DataTables (Bootstrap 5 integration)** – Interactive tables for Users.
+- **Toastr** – Toast notifications for success, warning, and error messages.
+- **Animate.css** – Smooth animations for page elements (fadeIn, zoomIn, slideInDown, etc.).
+- **FontAwesome** – Icons for buttons (edit, delete, view, star, etc.).
 
-➕ Add / ✏️ Edit / 🗑 Delete posts locally.
+---
 
-Live 🔎 search on post title/body.
-
-View 💬 comments for each post fetched from API.
-
-💾 Export / Import:
-
-Export local data (users, favorites, posts) as JSON.
-
-Import previously exported JSON to restore data.
-
-🌙 Dark / Light Mode toggle for comfortable viewing.
-
-🔔 Notifications using Toastr for actions like add, edit, delete, favorite, and errors.
-
-✨ Animations with Animate.css for smooth transitions.
-
-📚 Libraries / Dependencies
-
-Bootstrap 5 – Responsive layout, cards, buttons, modals, navbars, tables.
-
-jQuery – DOM manipulation, event handling, AJAX requests.
-
-DataTables (Bootstrap 5 integration) – Interactive tables for Users.
-
-Toastr – Toast notifications for success, warning, and error messages.
-
-Animate.css – Smooth animations for page elements (fadeIn, zoomIn, slideInDown, etc.).
-
-FontAwesome – Icons for buttons (edit, delete, view, star, etc.).
-
-📂 File Structure
+## 📂 File Structure
+```
 project/
 │
 ├─ index.html         # Main HTML dashboard
@@ -65,35 +57,33 @@ project/
 ├─ JS/
 │   └─ main.js        # Dashboard logic, API calls, local storage handling
 ├─ README.md          # Documentation
+```
 
-⚡ Getting Started
+---
 
-Clone / Download the project.
+## ⚡ Getting Started
 
-Open index.html in any modern browser (Chrome, Edge, Firefox).
-No server setup is required because data is fetched from JSONPlaceholder and local storage.
+1. Clone / Download the project.
+2. Open **index.html** in any modern browser (Chrome, Edge, Firefox).  
+   *No server setup is required because data is fetched from JSONPlaceholder and local storage.*
 
-Interacting with Dashboard:
+### Interacting with Dashboard
+- 🧭 **Navigation:** Use the navbar to switch between Dashboard, Users, and Posts.
+- 👤 **Users:** Add / Edit / Delete users locally. Toggle ⭐ Favorites.
+- 📝 **Posts:** Add / Edit / Delete posts locally. Live search with 🔎 input.
+- 💾 **Export / Import** your local data using navbar buttons.
+- 🌙 **Dark / Light mode** toggle with the moon icon.
 
-🧭 Navigation: Use the navbar to switch between Dashboard, Users, and Posts.
+---
 
-👤 Users: Add / Edit / Delete users locally. Toggle ⭐ Favorites.
+## 📝 Notes
+- All local changes (added users/posts, favorites) are stored in **LocalStorage**.
+- The app is fully **client-side** and does not require a backend.
+- JSONPlaceholder API provides dummy data for Users, Posts, and Comments.
 
-📝 Posts: Add / Edit / Delete posts locally. Live search with 🔎 input.
+---
 
-💾 Export / Import your local data using navbar buttons.
-
-🌙 Dark / Light mode toggle with the moon icon.
-
-📝 Notes
-
-All local changes (added users/posts, favorites) are stored in LocalStorage.
-
-The app is fully client-side and does not require a backend.
-
-JSONPlaceholder API provides dummy data for Users, Posts, and Comments.
-
-🖼 Screenshots
+## 🖼 Screenshots
 <img width="1366" height="651" alt="1" src="https://github.com/user-attachments/assets/786d31cf-7bcb-4661-a9e1-7f7594c1080e" />
 
 <img width="1358" height="655" alt="2" src="https://github.com/user-attachments/assets/18bc0322-a1f4-44f4-be1d-850b6f24a5fb" />
@@ -107,7 +97,7 @@ JSONPlaceholder API provides dummy data for Users, Posts, and Comments.
 <img width="1348" height="648" alt="6" src="https://github.com/user-attachments/assets/3a684a98-827a-4f9e-bb3c-81641907564c" />
 <img width="1359" height="645" alt="7" src="https://github.com/user-attachments/assets/f98b2d7e-b656-4b09-8ef7-b6e535c461d6" />
 
+---
 
-📜 License
-
-Open-source and free to use for learning or demo purposes.
+## 📜 License
+Open-source and free to use for **learning or demo purposes**.
