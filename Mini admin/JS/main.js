@@ -179,6 +179,17 @@
     }
 
     // Save user edits (persist locally)
+    function isValidEmail(email) {
+      // تحقق من صيغة الإيميل
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+
+    function isValidPhone(phone){
+      // تحقق من معظم أرقام الهاتف العالمية
+      const re = /^\+?[0-9]{1,4}?[-.\s]?(\(?\d{1,3}?\)?[-.\s]?)*\d{1,4}[-.\s]?\d{1,9}$/;
+      return re.test(phone);
+    }
     function saveUserEdits(){
       const idVal = $('#u-id').val();
       const name = $('#u-name').val().trim();
@@ -192,6 +203,15 @@
         return;
       }
 
+      if(!isValidEmail(email)){
+        toastr.warning('Invalid email format');
+        return;
+      }
+
+      if(phone && !isValidPhone(phone)){
+        toastr.warning('Invalid phone number');
+        return;
+      }      
       if(idVal){  
         // ✏️ تعديل يوزر موجود
         const id = Number(idVal);
