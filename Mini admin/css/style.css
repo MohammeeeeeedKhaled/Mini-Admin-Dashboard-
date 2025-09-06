@@ -30,11 +30,16 @@ body.dark {
   --shadow: 0 6px 20px rgba(0,0,0,.08);
 }
 
+
 /* Body */
 body {
   background: var(--bg);
   color: var(--text);
   transition: background .2s, color .2s;
+  -webkit-transition: background .2s, color .2s;
+  -moz-transition: background .2s, color .2s;
+  -ms-transition: background .2s, color .2s;
+  -o-transition: background .2s, color .2s;
 }
 
 /* Cards and containers */
@@ -44,9 +49,13 @@ body {
   background: var(--card);
   color: var(--text);
   border: 1px solid var(--border-color);
-  border-radius: 0.25rem; /* Default Bootstrap card radius */
-  box-shadow: var(--shadow);
+  border-radius: 0.25rem;
+  /*DefaultBootstrapcardradius*/box-shadow: var(--shadow);
   transition: background .2s, color .2s, border-color .2s;
+  -webkit-transition: background .2s, color .2s, border-color .2s;
+  -moz-transition: background .2s, color .2s, border-color .2s;
+  -ms-transition: background .2s, color .2s, border-color .2s;
+  -o-transition: background .2s, color .2s, border-color .2s;
 }
 
 /* Navbar */
@@ -54,8 +63,15 @@ body {
   background-color: var(--navbar);
   border-bottom: 1px solid var(--border-color);
   transition: background .2s, color .2s, border-color .2s;
+  -webkit-transition: background .2s, color .2s, border-color .2s;
+  -moz-transition: background .2s, color .2s, border-color .2s;
+  -ms-transition: background .2s, color .2s, border-color .2s;
+  -o-transition: background .2s, color .2s, border-color .2s;
 }
 
+.navbar-brand {
+    color: #dbe0e5;
+}
 /* Tables */
 .table thead {
   background-color: var(--table-head);
@@ -110,6 +126,10 @@ body {
   align-items: center;
   box-shadow: var(--shadow);
   transition: background .2s, color .2s, border-color .2s;
+  -webkit-transition: background .2s, color .2s, border-color .2s;
+  -moz-transition: background .2s, color .2s, border-color .2s;
+  -ms-transition: background .2s, color .2s, border-color .2s;
+  -o-transition: background .2s, color .2s, border-color .2s;
 }
 
 /* Favorite star */
