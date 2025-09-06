@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Freelance Dashboard — Users & Posts</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- DataTables (Bootstrap 5 integration) CSS -->
+  <link href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <!-- Toastr CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+  <!-- Loader -->
+  <div id="loader" class="loader-overlay animate__animated animate__fadeIn" style="display:flex">
+    <div class="loader-box animate__animated animate__pulse">
+      <div class="spinner-border" role="status" aria-hidden="true"></div>
+      <div>
+        <strong>Loading...</strong>
+        <div class="small-muted">Fetching data from jsonplaceholder</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light animate__animated animate__slideInDown">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" id="nav-dashboard">Mini Admin Dashboard</a>
+      <div class="d-flex align-items-center gap-2">
+        <button class="btn btn-outline-secondary btn-sm" id="toggle-mode" title="Toggle light/dark"><i class="fa-regular fa-moon"></i></button>
+        <div class="btn-group ms-2">
+          <button class="btn btn-sm btn-primary" id="nav-users">Users</button>
+          <button class="btn btn-sm btn-secondary" id="nav-posts">Posts</button>
+        </div>
+        <div class="btn-group ms-3">
+          <button class="btn btn-sm btn-outline-info nav-export" id="exportData"><i class="fa-solid fa-file-export"></i> Export JSON</button>
+          <button class="btn btn-sm btn-outline-success" id="importDataBtn"><i class="fa-solid fa-file-import"></i> Import JSON</button>
+          <input type="file" id="importInput" accept="application/json" style="display:none"/>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-4">
+
+    <!-- DASHBOARD STATS -->
+    <div id="page-dashboard">
+      <div class="row g-3">
+        <div class="col-md-4 animate__animated animate__zoomIn">
+          <div class="card p-3 shadow-sm">
+            <h6 class="mb-1">Users</h6>
+            <h2 id="stat-users">0</h2>
+            <div class="small-muted">Fetched from API plus local changes</div>
+          </div>
+        </div>
+        <div class="col-md-4 animate__animated animate__zoomIn">
+          <div class="card p-3 shadow-sm">
+            <h6 class="mb-1">Posts</h6>
+            <h2 id="stat-posts">0</h2>
+            <div class="small-muted">API + local posts</div>
+          </div>
+        </div>
+        <div class="col-md-4 animate__animated animate__zoomIn">
+          <div class="card p-3 shadow-sm">
+            <h6 class="mb-1">Comments</h6>
+            <h2 id="stat-comments">0</h2>
+            <div class="small-muted">Total comments fetched</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mt-4 p-3">
+        <h5>Overview</h5>
+        <p class="small-muted mb-0">Users are displayed with DataTables (Bootstrap styling). Posts support local Add / Edit / Delete and show comments fetched from JSONPlaceholder. Favorites are stored to LocalStorage. Toastr shows notifications for operations.</p>
+      </div>
+    </div>
+
+    <!-- USERS PAGE -->
+    <div id="page-users" style="display:none">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Users</h4>
+        <div class="d-flex align-items-center gap-2">
+          <button class="btn btn-success btn-sm" id="addUserBtn">Add User</button>
+          <button class="btn btn-danger btn-sm" id="clear-favs">Clear Favorites</button>
+        </div>
+      </div>
+
+      <div class="card p-3 shadow-sm">
+        <div class="table-responsive">
+          <table id="usersTable" class="table table-striped table-bordered animate__animated animate__fadeInUp" style="width:100%">
+            <thead>
+              <tr>
+                <th>Fav</th>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Company</th>
+                <th class="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- POSTS PAGE -->
+    <div id="page-posts" style="display:none">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Posts</h4>
+        <div class="d-flex gap-2">
+          <input id="posts-search" class="form-control form-control-sm" placeholder="Live search title/body" />
+          <button class="btn btn-success btn-sm" id="addPostBtn">Add Post</button>
+        </div>
+      </div>
+      <div id="posts-list" class="row g-3"></div>
+    </div>
+
+  </div>
+
+<!-- MODALS -->
+<!-- User Modal -->
+<div class="modal fade" id="userModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add/Edit User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="u-id">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input type="text" id="u-name" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" id="u-username" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" id="u-email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone</label>
+          <input type="text" id="u-phone" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Company</label>
+          <input type="text" id="u-company" class="form-control">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="save-user">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Post Modal -->
+<div class="modal fade" id="postModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add/Edit Post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="p-id">
+        <div class="mb-3">
+          <label class="form-label">Title</label>
+          <input type="text" id="p-title" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Body</label>
+          <textarea id="p-body" class="form-control" rows="4" required></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="save-post">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Comments Modal -->
+<div class="modal fade" id="commentsModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Comments</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="comments-body">
+        <!-- Comments will be loaded here dynamically -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- User View Modal -->
+<div class="modal fade" id="userViewModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">User Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="userViewBody">
+        <!-- User details loaded here -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Are you sure message? -->
+<div class="modal fade" id="confirmModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Action</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="confirmMessage">
+        Are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="confirmOkBtn">OK</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Hidden download link (for export) -->
+  <a id="downloadLink" style="display:none"></a>
+
+  <!-- SCRIPTS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="JS/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+/* 🌙 Improved Dark Mode with correct borders & shadows */
+
+/* Root variables for light mode */
+:root {
+  --bg: #f8f9fa;
+  --card: #ffffff;
+  --text: #212529;
+  --muted: #6c757d;
+  --primary: #0d6efd;
+  --danger: #dc3545;
+  --navbar: #ffffff;
+  --table-head: #f8f9fa;
+  --table-even: #f8f9fa;
+  --border-color: rgba(0,0,0,.125);
+  --shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+}
+
+/* Dark mode variables */
+body.dark {
+  --bg: #121212;
+  --card: #1e1e1e;
+  --text: #e0e0e0;
+  --muted: #9aa6b2;
+  --primary: #0d6efd;
+  --danger: #dc3545;
+  --navbar: #1c1c1c;
+  --table-head: #2c2c2c;
+  --table-even: #252525;
+  --border-color: rgba(255,255,255,0.1);
+  --shadow: 0 6px 20px rgba(0,0,0,.08);
+}
+
+/* Body */
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background .2s, color .2s;
+}
+
+/* Cards and containers */
+.card,
+.table,
+.modal-content {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem; /* Default Bootstrap card radius */
+  box-shadow: var(--shadow);
+  transition: background .2s, color .2s, border-color .2s;
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--navbar);
+  border-bottom: 1px solid var(--border-color);
+  transition: background .2s, color .2s, border-color .2s;
+}
+
+/* Tables */
+.table thead {
+  background-color: var(--table-head);
+}
+
+.table tbody tr {
+  background-color: var(--card);
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: var(--table-even);
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-danger {
+  background-color: var(--danger);
+  border-color: var(--danger);
+}
+
+/* Text muted */
+.small-muted {
+  color: var(--muted);
+}
+
+/* Loader */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.28);
+  z-index: 11000;
+}
+
+.loader-box {
+  background: var(--card);
+  padding: 18px 22px;
+  border-radius: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-shadow: var(--shadow);
+  transition: background .2s, color .2s, border-color .2s;
+}
+
+/* Favorite star */
+.star-btn {
+  cursor: pointer;
+  font-size: 18px;
+  border: none;
+  background: transparent;
+}
+
+.star-btn.favorited {
+  color: gold;
+}
+
+/* Export/Import buttons */
+.nav-export {
+  margin-left: 8px;
+}
+
+/* Posts search input */
+#posts-search {
+  max-width: 360px;
+}
+
+.dataTables_wrapper .dataTables_filter label {
+  display: block;
+}
+
+/* Modals */
+.modal {
+  z-index: 11500;
+  border-radius: 0.5rem; /* Bootstrap modal radius */
+  transition: background .2s, color .2s, border-color .2s;
+}
+
+/* Responsive small fixes */
+@media (max-width:575px){
+  .hide-xs {
+    display:none !important;
+  }
+}
